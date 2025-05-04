@@ -1,0 +1,823 @@
+/* General Reset and Background */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Video Background */
+.video-container, .content {
+  position: relative;
+  z-index: 1;
+}
+
+.video-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+#background-video, #backgroundVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Overlay Content (Landing Page) */
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.overlay-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.overlay-content p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.glow-on-hover {
+  padding: 10px 30px;
+  font-size: 18px;
+  color: #fff;
+  background-color: black;
+  border: 2px solid cyan;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.glow-on-hover:hover {
+  background-color: cyan;
+  color: black;
+}
+
+/* Cursor Trail */
+.cursor-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+/* Content Page */
+.content {
+  text-align: center;
+  padding: 50px 20px;
+  color: #ffffff;
+}
+
+/* Input Area */
+.input-area {
+  margin: 20px 0;
+}
+
+.input-area input {
+  padding: 10px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #ffffffcc;
+  color: #000;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.input-area input.shake {
+  animation: shake 0.5s;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Button Area */
+.button-area {
+  margin-top: 20px;
+}
+
+#process-container {
+  margin-top: 30px;
+}
+
+/* Process Buttons (States) */
+.process-button {
+  padding: 15px;
+  margin: 10px;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  width: 100px;
+  height: 100px;
+  color: white;
+  transition: 0.4s ease;
+  background-color: #222222aa;
+}
+
+/* New State-Specific Styles */
+.process-button.idle {
+  background-color: #333;
+  box-shadow: 0 0 10px #555;
+}
+
+.process-button.trying {
+  background-color: #ffaa00;
+  box-shadow: 0 0 15px orange;
+}
+
+.process-button.waiting {
+  background-color: #ff0000aa;
+  box-shadow: 0 0 20px red;
+}
+
+.process-button.critical {
+  background-color: #00ff00aa;
+  box-shadow: 0 0 20px lime;
+}
+
+/* Status Display */
+#statusArea {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #00ffff;
+  min-height: 30px;
+}
+
+/* Console Log Output */
+#logOutput {
+  font-family: monospace;
+  font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #111;
+  color: #00ffff;
+  border: 1px solid #00ffff44;
+  box-shadow: inset 0 0 10px #00ffff22;
+  padding: 15px;
+  margin-top: 30px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+/* Code Viewer Section */
+#codeSection {
+  overflow-x: auto;
+  max-width: 800px;
+  margin: 20px auto;
+  font-size: 14px;
+  border: 1px solid #00ffff66;
+  background-color: #111;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+/* Hamburger and Side Panel */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #00ffff;
+  z-index: 1001;
+}
+
+.side-panel {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+.side-panel h2, .side-panel p {
+  color: #00ffff;
+  margin: 20px;
+}
+
+.side-panel .learn-more {
+  display: block;
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #00ffff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.side-panel .learn-more:hover {
+  background-color: #00cccc;
+}
+
+.side-panel {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+.info-section {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+  line-height: 1.6;
+}
+
+.info-section h2 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  color: #00ffd0;
+}
+
+.info-section ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* About html */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  font-family: sans-serif; /* or your preferred font */
+  color: white; /* for contrast against dark video */
+}
+
+.content {
+  padding: 2rem;
+  position: relative;
+  z-index: 1; /* Make sure content appears above video */
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color:#00ffd0;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 50px 0;
+  position: relative;
+  z-index: 1; /* Ensure header is above video */
+  background:none;
+}
+header {
+  background-color: transparent !important;
+}
+
+
+h1 {
+  font-size: 3rem;
+  color: #00ffd0;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #00ffd0;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  position: relative;
+  z-index: 2; /* Ensure button is above video */
+}
+
+button:hover {
+  background-color: #00cccc;
+}
+
+.content {
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2; /* Ensure content is above video */
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #00ffd0;
+}
+
+h3 {
+  font-size: 1.8rem;
+  color: #00ffd0;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+ul li::before {
+  content: '• ';
+  color: #00ffd0;
+  font-size: 1.4rem;
+  margin-right: 10px;
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure video is behind everything */
+}
+
+
+/*faq-html*/
+
+/* Background Video */
+#backgroundVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Dark Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Heading */
+h2 {
+  color: #00ffd0;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+/* FAQ Container */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* FAQ Item */
+.faq-item {
+  border-bottom: 1px solid #444;
+  padding: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Question Style */
+.faq-question {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  color:#69aeee;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.faq-question:hover {
+  transform: translateX(8px);
+  color: #00ffd0;
+}
+
+/* Arrow Rotation */
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .arrow {
+  transform: rotate(90deg);
+}
+
+/* Answer Style */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  color: #ccc;
+  font-size: 1.1rem;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 10px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* realworld */
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Dark background */
+  color: #ffffff; /* White text for contrast */
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #1a73e8; /* Blue background */
+  color: white;
+  padding: 20px 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.realworld-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h2 {
+  color: #1a73e8; /* Blue color for subheadings */
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+p {
+  font-size: 16px;
+  color: #d1d1d1; /* Lighter gray text */
+  margin-bottom: 20px;
+}
+
+/* Kitchen Simulation Layout */
+.kitchen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+  gap:40px;
+}
+.bob-container{
+  order:1;
+}
+/* Highlight / Pop Effect */
+.character-container.pop {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #00ffd0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Optional: Smooth reset */
+.character-container {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-container {
+  margin: 70px;
+  text-align: center;
+  position: relative;
+}
+
+.character-container img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 3px solid #1a73e8; /* Blue border */
+  object-fit: cover;
+}
+
+.thought-bubble {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  border: 2px solid #1a73e8; /* Blue border for bubbles */
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 70px;
+}
+
+button {
+  background-color: #1566d0; /* Blue button background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color:#00ffd0; /* Darker blue on hover */
+}
+
+.kitchen img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+.process-box {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #444;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.process-box.Trying {
+  background-color: orange;
+}
+
+.process-box.Waiting {
+  background-color: blue;
+}
+
+.process-box.Critical {
+  background-color: green;
+}
+
+.process-box.Idle {
+  background-color: #444;
+}
+/* New State-Specific Styles */
+.process-button.idle {
+  background-color: #333;
+  box-shadow: 0 0 10px #555;
+}
+
+.process-button.trying {
+  background-color: #ffaa00;
+  box-shadow: 0 0 15px orange;
+}
+
+.process-button.waiting {
+  background-color: #ff0000aa;
+  box-shadow: 0 0 20px red;
+}
+
+.process-button.critical {
+  background-color: #00ff00aa;
+  box-shadow: 0 0 20px lime;
+}
+
+/* Status Display */
+#statusArea {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #00ffff;
+  min-height: 30px;
+}
+
+/* Console Log Output */
+#logOutput {
+  font-family: monospace;
+  font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #111;
+  color: #00ffff;
+  border: 1px solid #00ffff44;
+  box-shadow: inset 0 0 10px #00ffff22;
+  padding: 15px;
+  margin-top: 30px;
+  border-radius: 10px;
+  text-align: left;
+}
+#process-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.process-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.4s ease;
+  box-shadow: 0 0 15px #00000055;
+}
+
+.process-circle.trying {
+  background-color: red;
+}
+
+.process-circle.critical {
+  background-color: green;
+}
+
+.process-circle.idle {
+  background-color: grey;
+}
+.process-button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+/* Container layout */
+#process-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+h2 {
+  color: #00ffd0;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  }
+
+/* Process circle styles */
+.process {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.process-button.trying {
+  background-color: orange; /* Trying state */
+}
+
+.process-button.waiting {
+  background-color: red; /* Waiting state */
+}
+
+.process-button.critical {
+  background-color: green; /* Critical section state */
+}
+
+.process-button.idle {
+  background-color: gray; /* Idle state */
+}
+
+/* Container to align the processes in the center */
+#process-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}

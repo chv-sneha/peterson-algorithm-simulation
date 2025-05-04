@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Peterson's Algorithm</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="backgroundVideo">
+    <source src="assets/calix.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Cursor Trail (optional) -->
+  <div id="cursorTrail"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <header>
+      <h1>About Peterson's Algorithm</h1>
+      <button onclick="goHome()">Back to Home</button>
+    </header>
+
+    <div class="content">
+      <section class="overview">
+        <h2>Overview</h2>
+        <p>
+          Peterson's Algorithm is a classical solution to the <strong>critical section problem</strong> in concurrent programming, providing a mechanism for ensuring mutual exclusion between two processes.
+        </p>
+      </section>
+
+      <section class="how-it-works">
+        <h2>How It Works</h2>
+        <p>The algorithm uses two variables, <code>flag[0], flag[1]</code>, to represent the intent of each process, and a shared <code>turn</code> variable to ensure that the processes take turns accessing the critical section. The logic works as follows:</p>
+        <ul>
+          <li><code>flag[0], flag[1]</code>: Represents whether the process wants to enter the critical section.</li>
+          <li><code>turn</code>: Ensures that the other process gets a chance to enter the critical section if both processes desire it at the same time.</li>
+        </ul>
+      </section>
+
+      <section class="concepts">
+        <h2>Important Concepts</h2>
+        <p>Peterson's Algorithm ensures the following:</p>
+        <ul>
+          <li><strong>Mutual Exclusion:</strong> No two processes can be in the critical section simultaneously.</li>
+          <li><strong>Progress:</strong> If no process is in the critical section, one will eventually enter.</li>
+          <li><strong>Bounded Waiting:</strong> Each process gets a fair opportunity to enter the critical section after a bounded amount of time.</li>
+        </ul>
+      </section>
+
+      <section class="limitations">
+        <h2>Limitations</h2>
+        <p>While Peterson's Algorithm is a brilliant solution for two processes, it does not extend to systems with more than two processes. This limitation makes it more suitable as a teaching tool than a production-level solution in modern computing systems.</p>
+      </section>
+
+      <section class="real-world">
+        <h2>Usage in Real-World Systems</h2>
+        <p>Primarily used for educational purposes, Peterson's Algorithm provides a foundational understanding of synchronization concepts. However, more scalable and efficient algorithms like <strong>Lamport's Bakery Algorithm</strong> or <strong>Mutex</strong> are used in real-world systems.</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function goHome() {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <script src="scripts/cursor.js"></script>
+</body>
+</html>

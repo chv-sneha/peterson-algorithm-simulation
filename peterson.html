@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Peterson's Algorithm Simulation</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <style>
+    #theorySection, #codeSection {
+      transition: all 0.4s ease;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    #theorySection.show, #codeSection.show {
+      opacity: 1;
+      max-height: 1000px; /* large enough to show full content */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop id="backgroundVideo">
+  <source src="assets/earthh.mp4" type="video/mp4">
+</video>
+
+<div class="content">
+  <h1>Peterson's Algorithm Simulation</h1>
+
+  <div class="input-area">
+    <input type="number" id="numProcesses" placeholder="Enter number of processes (2)">
+    <button class="glow-on-hover" onclick="createProcesses()">Start Simulation</button>
+  </div>
+  
+  <div id="process-container"></div>
+  <p id="errorMsg" style="color:red; font-weight:bold; margin-top:10px;"></p>
+  <div id="raceConditionContent" style="display: none;"></div>
+  <iframe id="raceConditionFrame" src="race.html" style="width: 100%; height: 400px; border: none; display: none;"></iframe>
+
+
+
+  <div class="button-area">
+    <button class="glow-on-hover" onclick="startSimulation()">Run Simulation</button>
+    <button class="glow-on-hover" onclick="resetSimulation()">Reset</button>
+    <button class="glow-on-hover" onclick="goHome()">Go Home</button>
+    <button class="glow-on-hover" onclick="toggleCode()">Show Code</button>
+    <button class="glow-on-hover" onclick="toggleTheory()">Show Theory</button>
+    <button class="glow-on-hover" onclick="toggleRaceCondition()"> Race Condition</button>
+
+  </div>
+
+  <div id="theorySection">
+    <h3>What is Peterson's Algorithm?</h3>
+    <p>
+      Peterson’s Algorithm is a classic software-based solution to achieve mutual exclusion between two processes. It uses two shared variables — a boolean array <code>flag[]</code> and an integer <code>turn</code> — to ensure that only one process can enter the critical section at a time.
+    </p>
+    <ul>
+      <li><b>flag[i]</b>: Indicates whether process <code>i</code> wants to enter the critical section.</li>
+      <li><b>turn</b>: Indicates whose turn it is to enter the critical section.</li>
+    </ul>
+    <p>
+      It satisfies mutual exclusion, progress, and bounded waiting properties.
+    </p>
+  </div>
+  <div id="raceOutput" style="margin-top:20px; color:yellow; font-weight:bold;"></div>
+
+
+  <div id="statusArea"></div>
+
+  <!-- Code Viewer Section -->
+  <div id="codeSection">
+    <select id="languageSelector" onchange="switchCodeLanguage()" style="margin-bottom: 10px; padding: 5px; border-radius: 5px;">
+      <option value="python">Python</option>
+      <option value="c">C</option>
+      <option value="cpp">C++</option>
+      <option value="java">Java</option>
+    </select>
+
+    <pre id="code-python" class="language-python"><code>
+# Python version
+flag = [False, False]
+turn = 0
+
+def enter_critical_section(i):
+    other = 1 - i
+    flag[i] = True
+    turn = other
+    while flag[other] and turn == other:
+        pass  # wait
+    # critical section
+
+def exit_critical_section(i):
+    flag[i] = False
+    </code></pre>
+
+    <pre id="code-c" class="language-c" style="display:none;"><code>
+// C version
+bool flag[2] = {false, false};
+int turn = 0;
+
+void enter_critical_section(int i) {
+    int other = 1 - i;
+    flag[i] = true;
+    turn = other;
+    while (flag[other] && turn == other);
+    // critical section
+}
+
+void exit_critical_section(int i) {
+    flag[i] = false;
+}
+    </code></pre>
+
+    <pre id="code-cpp" class="language-cpp" style="display:none;"><code>
+// C++ version
+#include <atomic>
+using namespace std;
+
+atomic<bool> flag[2] = {false, false};
+atomic<int> turn = 0;
+
+void enter_critical_section(int i) {
+    int other = 1 - i;
+    flag[i] = true;
+    turn = other;
+    while (flag[other] && turn == other);
+    // critical section
+}
+
+void exit_critical_section(int i) {
+    flag[i] = false;
+}
+    </code></pre>
+
+    <pre id="code-java" class="language-java" style="display:none;"><code>
+// Java version
+class Peterson {
+    volatile boolean[] flag = new boolean[2];
+    volatile int turn;
+
+    public void enterCriticalSection(int i) {
+        int other = 1 - i;
+        flag[i] = true;
+        turn = other;
+        while (flag[other] && turn == other) {
+            // busy wait
+        }
+    }
+
+    public void exitCriticalSection(int i) {
+        flag[i] = false;
+    }
+}
+    </code></pre>
+  </div>
+
+  <!-- Console Log Output -->
+  <div id="logOutput" style="text-align:left; margin-top:30px; background:#00000088; padding:15px; border-radius:10px; color:#00ffff;"></div>
+</div>
+
+<!-- Dropdown Menu -->
+<div id="dropdownMenu" style="display:none; position:absolute; top:50px; left:10px; background:white; border:1px solid #ccc; padding:10px; z-index:1000;">
+  <a href="https://www.geeksforgeeks.org/petersons-algorithm-in-process-synchronization/" target="_blank" style="text-decoration:none; color:black;">Learn More</a>
+  <a href="javascript:void(0);" onclick="toggleAbout()" style="text-decoration:none; color:black; display:block; margin-bottom:5px;">About</a>
+  <a href="javascript:void(0);" onclick="toggleFAQ()" style="text-decoration:none; color:black;">FAQ</a>
+</div>
+
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+<script>
+  function toggleTheory() {
+    const section = document.getElementById("theorySection");
+    section.classList.toggle("show");
+  }
+
+  function toggleCode() {
+    const section = document.getElementById("codeSection");
+    section.classList.toggle("show");
+  }
+</script>
+
+</body>
+</html>

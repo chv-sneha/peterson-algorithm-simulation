@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peterson's Algorithm - Kitchen Simulation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="assets/matrix.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <h1>Peterson's Algorithm - Kitchen Simulation</h1>
+  </header>
+
+  <main>
+    <section class="realworld-page">
+      <h2>Real World Analogy</h2>
+      <p>
+        Alice and Bob want to use a shared kitchen to cook. To avoid bumping into each other or causing chaos, they follow a set of rules inspired by Peterson's Algorithm to decide who gets to use the kitchen.
+      </p>
+
+      <div class="kitchen-container">
+        <div class="character-container alice-container">
+          <img src="assets/alice.jpg" alt="Alice" id="alice" />
+          <p>Alice</p>
+          <div class="thought-bubble" id="aliceBubble">"I want to cook!"</div>
+        </div>
+
+        <div class="character-container bob-container">
+          <img src="assets/bob.jpg" alt="Bob" id="bob" />
+          <p>Bob</p>
+          <div class="thought-bubble" id="bobBubble">"I want to cook!"</div>
+        </div>
+
+        <div class="kitchen" id="kitchen">
+          <img src="assets/kitchen.jpeg" alt="Kitchen" />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button onclick="aliceWantsToCook()">Alice Wants to Cook</button>
+        <button onclick="bobWantsToCook()">Bob Wants to Cook</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

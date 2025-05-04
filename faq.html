@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="backgroundVideo">
+    <source src="assets/rubix.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Overlay Content -->
+  <div class="content-wrapper">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            What is Peterson's Algorithm?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            Peterson's Algorithm is a software-based solution to the critical section problem, ensuring mutual exclusion between two processes.
+          </div>
+        </div>
+      
+        <div class="faq-item">
+          <div class="faq-question">
+            How does mutual exclusion work?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            Mutual exclusion ensures that only one thread or process accesses a critical section at a time, preventing race conditions.
+          </div>
+        </div>
+      
+        <div class="faq-item">
+          <div class="faq-question">
+            Why is the critical section important?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            The critical section is important because it contains shared resources that must not be accessed by more than one thread at once to maintain data integrity.
+          </div>
+        </div>
+      
+        <div class="faq-item">
+          <div class="faq-question">
+            What are the drawbacks of Peterson’s Algorithm?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            It only works for two processes, and modern CPUs may reorder instructions, breaking its guarantees unless memory fences are used.
+          </div>
+        </div>
+      
+        <div class="faq-item">
+          <div class="faq-question">
+            Is Peterson’s Algorithm still used today?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            It's mainly used for educational purposes today, as hardware-level solutions like mutexes or semaphores are preferred in real systems.
+          </div>
+        </div>
+      
+        <div class="faq-item">
+          <div class="faq-question">
+            What does "busy waiting" mean?
+            <span class="arrow">➤</span>
+          </div>
+          <div class="faq-answer">
+            Busy waiting occurs when a process constantly checks for a condition without releasing CPU resources, leading to inefficiency.
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        faqItems.forEach(i => {
+          if (i !== item) i.classList.remove('active');
+        });
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peterson's Algorithm Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #000000;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        #raceConditionToggle {
+            margin: 20px;
+            font-size: 1.2em;
+        }
+
+        #simulation {
+            margin-top: 30px;
+            height: 300px;
+            background-color: #e8e8e8;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .active {
+            background-color: #ffb3b3;
+            color: red;
+        }
+
+        .stable {
+            background-color: #c1f0c1;
+            color: green;
+        }
+
+        .process {
+            margin: 10px;
+            padding: 20px;
+            background-color:  #00ffd0;;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            transition: all 1s ease;
+        }
+
+        .process.entering {
+            transition: transform 1s ease;
+            transform: scale(1.2);
+        }
+
+        #simulationText {
+            font-size: 1.5em;
+            position: absolute;
+            top: 80%;
+            width: 100%;
+            color: #333;
+            transform: translateY(-50%);
+        }
+
+        #arrows {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arrow {
+            font-size: 30px;
+            margin: 0 20px;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .arrow.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Button to toggle race condition -->
+    <div id="raceConditionToggle">
+        <button onclick="toggleRaceCondition()">Enable Race Condition</button>
+    </div>
+
+    <div id="simulation">
+        <div id="process1" class="process">Process 1</div>
+        <div id="process2" class="process">Process 2</div>
+        <p id="simulationText">Simulation Running...</p>
+        <div id="arrows">
+            <span class="arrow">→</span>
+            <span class="arrow">→</span>
+        </div>
+    </div>
+
+    <script>
+        let isRaceConditionActive = false;
+        function startRaceConditionSimulation() {
+  const process1 = document.getElementById('process1');
+  const process2 = document.getElementById('process2');
+  const simulationText = document.getElementById('simulationText');
+
+  // Simulate race condition: Both processes trying to enter the critical section
+  simulationText.textContent = "Race Condition Active: Both processes are trying to enter the critical section!";
+  
+  process1.style.backgroundColor = 'red';
+  process2.style.backgroundColor = 'red';
+  process1.classList.add('entering');
+  process2.classList.add('entering');
+
+  // After 1.5 seconds, remove the entering effect
+  setTimeout(() => {
+    process1.classList.remove('entering');
+    process2.classList.remove('entering');
+    process1.style.backgroundColor = 'gray';
+    process2.style.backgroundColor = 'gray';
+  }, 1500);
+}
+
+
+        function toggleRaceCondition() {
+            const simulationDiv = document.getElementById('simulation');
+            const simulationText = document.getElementById('simulationText');
+            const arrows = document.querySelectorAll('.arrow');
+            isRaceConditionActive = !isRaceConditionActive;
+
+            if (isRaceConditionActive) {
+                // Show race condition: Both processes try to enter the critical section
+                simulationDiv.classList.add('active');
+                simulationDiv.classList.remove('stable');
+                simulationText.textContent = "Race Condition Active: Both processes are trying to enter the critical section!";
+                arrows.forEach(arrow => arrow.classList.add('show'));
+                simulateRaceCondition(); 
+            } else {
+                // Show Peterson's Algorithm: Process one gets access, then the other
+                simulationDiv.classList.remove('active');
+                simulationDiv.classList.add('stable');
+                simulationText.textContent = "Peterson's Algorithm: Mutual Exclusion Ensured.";
+                arrows.forEach(arrow => arrow.classList.remove('show'));
+                simulatePetersonAlgorithm();
+            }
+        }
+
+        function simulateRaceCondition() {
+            console.log("Simulating race condition...");
+            const process1 = document.getElementById('process1');
+            const process2 = document.getElementById('process2');
+
+            // Simulate race condition: Both processes trying to enter critical section
+            process1.style.backgroundColor = 'red';
+            process2.style.backgroundColor = 'red';
+            process1.classList.add('entering');
+            process2.classList.add('entering');
+            setTimeout(() => {
+                process1.classList.remove('entering');
+                process2.classList.remove('entering');
+                process1.style.backgroundColor = 'gray';
+                process2.style.backgroundColor = 'gray';
+            }, 1500);
+        }
+       
+
+        function simulatePetersonAlgorithm() {
+            console.log("Simulating Peterson's Algorithm...");
+            const process1 = document.getElementById('process1');
+            const process2 = document.getElementById('process2');
+
+            // Peterson's Algorithm Simulation
+            // Process 1 enters critical section
+            process1.style.backgroundColor = 'green';
+            process1.classList.add('entering');
+            setTimeout(() => {
+                // Process 1 exits and Process 2 enters
+                process1.classList.remove('entering');
+                process1.style.backgroundColor = 'gray';
+                process2.style.backgroundColor = 'green';
+                process2.classList.add('entering');
+            }, 1500);
+            setTimeout(() => {
+                // Both processes finish
+                process2.classList.remove('entering');
+                process2.style.backgroundColor = 'gray';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

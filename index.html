@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peterson's Solution</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="video-container">
+  <video autoplay muted loop playsinline id="background-video">
+    <source src="assets/background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="overlay-content">
+    <h1>Peterson's Solution</h1>
+    <p>A classic algorithm ensuring mutual exclusion in concurrent programming!</p>
+    <button onclick="window.location.href='peterson.html'" class="glow-on-hover">Start Simulation</button>
+  </div>
+</div>
+
+<!-- Hamburger Menu -->
+<div class="hamburger" onclick="toggleSidePanel()">☰</div>
+
+<!-- Side Panel -->
+<div id="sidePanel" class="side-panel">
+  <h2>Peterson's Solution</h2>
+  <button id="learnMoreBtn" class="learn-more">Learn More</button>
+  <button onclick="toggleAbout()" class="learn-more">About</button>
+  <button onclick="goToRealWorld()" class="learn-more analogy"> Real-Life Analogy</button>
+  <button onclick="goToFAQ()" class="learn-more">FAQ</button> <!-- Updated here to redirect -->
+</div>
+
+<div class="cursor-trail" id="cursorTrail"></div>
+
+<script src="script.js"></script>
+<script>
+  const sidePanel = document.getElementById("sidePanel");
+  
+  function toggleSidePanel() {
+    if (sidePanel.style.width === "250px") {
+      sidePanel.style.width = "0";
+    } else {
+      sidePanel.style.width = "250px";
+    }
+  }
+
+  function goToFAQ() {
+    window.location.href = 'faq.html';  // ✅ Redirects to faq.html
+  }
+
+  // New function added to redirect to about.html
+  function toggleAbout() {
+    window.location.href = "about.html";  // Redirect to about.html
+  }
+
+  // Added function to redirect to GeeksforGeeks website
+  function goToGeeks() {
+    window.location.href = 'https://www.geeksforgeeks.org/';  // Redirect to GeeksforGeeks
+  }
+</script>
+
+<!-- About Section -->
+<div id="aboutSection" class="info-section" style="display: none;">
+  <h2>About Peterson’s Algorithm</h2>
+  <p>
+    Peterson’s Algorithm is a classical solution to the critical section problem in concurrent programming. It ensures <strong>mutual exclusion</strong> between two processes without needing special hardware support.
+  </p>
+  <ul>
+    <li><strong>flag[0], flag[1]:</strong> Indicate process intent to enter critical section</li>
+    <li><strong>turn:</strong> Gives priority to the other process</li>
+  </ul>
+  <p>
+    It’s primarily used as a teaching tool to understand basic synchronization concepts like <em>mutual exclusion</em>, <em>progress</em>, and <em>bounded waiting</em>.
+  </p>
+</div>
+
+<!-- FAQ Section -->
+<div id="faqSection" class="info-section" style="display: none;">
+  <details>
+    <summary>What is the purpose of the turn variable?</summary>
+    <p>It ensures fairness by letting one process go first when both want to enter the critical section.</p>
+  </details>
+  <details>
+    <summary>Can Peterson's Algorithm be used for more than two processes?</summary>
+    <p>The basic algorithm is for two processes only. Extensions exist but are more complex.</p>
+  </details>
+  <details>
+    <summary>Is it used in real-world systems?</summary>
+    <p>No, it's more educational. Real systems use hardware-level synchronization (like semaphores, mutexes, etc.).</p>
+  </details>
+</div>
+
+<script src="scripts.js"></script>
+
+</body>
+</html>
+
